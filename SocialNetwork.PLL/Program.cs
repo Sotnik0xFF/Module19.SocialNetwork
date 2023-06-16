@@ -1,10 +1,22 @@
-﻿namespace SocialNetwork.PLL
+﻿using SocialNetwork.BLL.Services;
+using SocialNetwork.PLL.View;
+
+namespace SocialNetwork.PLL;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        UserService userService = new UserService();
+
+        MainView mainView = new MainView(userService);
+
+        Console.WriteLine("Добро пожаловать в SocialNetwork!\n");
+        while (true)
         {
-            Console.WriteLine("Hello, World!");
+            mainView.Show();
         }
     }
 }

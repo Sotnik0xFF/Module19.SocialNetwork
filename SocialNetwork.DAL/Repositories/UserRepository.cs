@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork.DAL.Repositories
+namespace SocialNetwork.DAL.Repositories;
+
+public class UserRepository : BaseRepository, IUserRepository
 {
-    internal class UserRepository : BaseRepository, IUserRepository
-    {
-        private const string UserStatement = @$"
+    private const string UserStatement = @$"
             id as {nameof(UserEntity.Id)},
             firstname as {nameof(UserEntity.FirstName)},
             lastname as {nameof(UserEntity.LastName)},
@@ -19,60 +19,60 @@ namespace SocialNetwork.DAL.Repositories
             favorite_book as {nameof(UserEntity.FavoriteBook)},
             favorite_movie as {nameof(UserEntity.FavoriteMovie)}";
 
-        public int Create(UserEntity userEntity)
-        {
-            string sql = @$"
-                INCERT INTO users (firstname, lastname, password, email')
+    public int Create(UserEntity userEntity)
+    {
+        string sql = @$"
+                INSERT INTO users (firstname, lastname, password, email)
                 VALUES (
                     @{nameof(UserEntity.FirstName)},
                     @{nameof(UserEntity.LastName)},
                     @{nameof(UserEntity.Password)},
                     @{nameof(UserEntity.Email)})";
 
-            return Execute(sql, userEntity);
-        }
+        return Execute(sql, userEntity);
+    }
 
-        public int DeleteById(int id)
-        {
-            string sql = $@"
+    public int DeleteById(int id)
+    {
+        string sql = $@"
                 DELETE FROM users
                 WHERE id = @UserId";
 
-            return Execute(sql, new { UserId = id });
-        }
+        return Execute(sql, new { UserId = id });
+    }
 
-        public IEnumerable<UserEntity> FindAll()
-        {
-            string sql = $@"
+    public IEnumerable<UserEntity> FindAll()
+    {
+        string sql = $@"
                 SELECT {UserStatement}
                 FROM users";
 
-            return Query<UserEntity>(sql);
-        }
+        return Query<UserEntity>(sql);
+    }
 
-        public UserEntity? FindByEmail(string email)
-        {
-            string sql = $@"
+    public UserEntity? FindByEmail(string email)
+    {
+        string sql = $@"
                 SELECT {UserStatement}
                 FROM users
                 WHERE email = @UserEmail";
 
-            return QueryFirstOrDefault<UserEntity>(sql, new { UserEmail = email });
-        }
+        return QueryFirstOrDefault<UserEntity>(sql, new { UserEmail = email });
+    }
 
-        public UserEntity? FindById(int id)
-        {
-            string sql = $@"
+    public UserEntity? FindById(int id)
+    {
+        string sql = $@"
                 SELECT {UserStatement}
                 FROM users
                 WHERE id = @UserId";
 
-            return QueryFirstOrDefault<UserEntity>(sql, new { UserId = id });
-        }
+        return QueryFirstOrDefault<UserEntity>(sql, new { UserId = id });
+    }
 
-        public int Update(UserEntity userEntity)
-        {
-            string sql = $@"
+    public int Update(UserEntity userEntity)
+    {
+        string sql = $@"
                 UPDATE users 
                 SET
                     id = @{nameof(UserEntity.Id)},
@@ -85,7 +85,6 @@ namespace SocialNetwork.DAL.Repositories
                     favorite_movie = @{nameof(UserEntity.FavoriteMovie)}
                 WHERE id = @{nameof(UserEntity.Id)}";
 
-            return Execute(sql, userEntity);
-        }
+        return Execute(sql, userEntity);
     }
 }

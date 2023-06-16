@@ -17,7 +17,7 @@ namespace SocialNetwork.DAL.Repositories
         public int Create(FriendEntity friendEntity)
         {
             string sql = $@"
-                INCERT INTO friends (user_id, friend_id)
+                INSERT INTO friends (user_id, friend_id)
                 VALUES (
                     @{nameof(FriendEntity.UserId)},
                     @{nameof(FriendEntity.UserId)})";

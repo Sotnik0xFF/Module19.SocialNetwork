@@ -18,7 +18,7 @@ namespace SocialNetwork.DAL.Repositories
         public int Create(MessageEntity messageEntity)
         {
             string sql = $@"
-                INCERT INTO messages (content, sender_id, recipient_id)
+                INSERT INTO messages (content, sender_id, recipient_id)
                 VALUES (
                     @{nameof(MessageEntity.Content)},
                     @{nameof(MessageEntity.SenderId)},
