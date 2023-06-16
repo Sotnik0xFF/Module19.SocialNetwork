@@ -1,4 +1,5 @@
-﻿using SocialNetwork.BLL.Models;
+﻿using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Models;
 using SocialNetwork.DAL.Entities;
 using SocialNetwork.DAL.Repositories;
 using System.ComponentModel.DataAnnotations;
@@ -47,5 +48,57 @@ public class UserService
 
         if (userRepository.Create(user) == 0)
             throw new Exception();
+    }
+
+    public User FindByEmail(string email)
+    {
+        UserEntity? findUserEntity = userRepository.FindByEmail(email);
+        if (findUserEntity is null) throw new UserNotFoundException();
+
+        return ConstructUserModel(findUserEntity);
+    }
+
+    public User Authenticate(UserAuthenticationData userAuthenticationData)
+    {
+        if (String.IsNullOrEmpty(userAuthenticationData.Email))
+            throw new ArgumentException(nameof(UserAuthenticationData.Email));
+
+        var findUserEntity = userRepository.FindByEmail(userAuthenticationData.Email);
+        if (findUserEntity is null) throw new UserNotFoundException();
+
+        if (findUserEntity.Password != userAuthenticationData.Password)
+            throw new WrongPasswordException();
+
+        return ConstructUserModel(findUserEntity);
+    }
+
+    public void Update(User user)
+    {
+        UserEntity updatableUserEntity = new()
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Password = user.Password,
+            Email = user.Email,
+            Photo = user.Photo,
+            FavoriteMovie = user.FavoriteMovie,
+            FavoriteBook = user.FavoriteBook
+        };
+
+        if (userRepository.Update(updatableUserEntity) == 0)
+            throw new Exception();
+    }
+
+    private User ConstructUserModel(UserEntity userEntity)
+    {
+        return new User(userEntity.Id,
+                      userEntity.FirstName,
+                      userEntity.LastName,
+                      userEntity.Password,
+                      userEntity.Email,
+                      userEntity.Photo,
+                      userEntity.FavoriteMovie,
+                      userEntity.FavoriteBook);
     }
 }

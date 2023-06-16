@@ -5,6 +5,7 @@ namespace SocialNetwork.PLL.View;
 public class MainView
 {
     private RegistrationView _registrationView;
+    private AuthenticationView _authenticationView;
     private UserService _userService;
 
     public MainView(UserService userService)
@@ -12,6 +13,7 @@ public class MainView
         _userService = userService;
 
         _registrationView = new RegistrationView(_userService);
+        _authenticationView = new AuthenticationView(_userService);
     }
 
     public void Show()
@@ -25,7 +27,7 @@ public class MainView
         {
             case "1":
                 {
-                    //Program.authenticationView.Show();
+                    _authenticationView.Show();
                     break;
                 }
 
