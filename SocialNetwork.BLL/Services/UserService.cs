@@ -53,7 +53,17 @@ public class UserService
     public User FindByEmail(string email)
     {
         UserEntity? findUserEntity = userRepository.FindByEmail(email);
-        if (findUserEntity is null) throw new UserNotFoundException();
+        if (findUserEntity is null)
+            throw new UserNotFoundException();
+
+        return ConstructUserModel(findUserEntity);
+    }
+
+    public User FindById(int id)
+    {
+        UserEntity? findUserEntity = userRepository.FindById(id);
+        if (findUserEntity is null)
+            throw new UserNotFoundException();
 
         return ConstructUserModel(findUserEntity);
     }

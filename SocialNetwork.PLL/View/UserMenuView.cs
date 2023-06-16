@@ -8,18 +8,21 @@ public class UserMenuView
 {
     private UserService _userService;
     private UserInfoView _userInfoView;
+    private UserDataUpdateView _userDataUpdateView;
 
     public UserMenuView(UserService userService)
     {
         _userService = userService;
 
         _userInfoView = new UserInfoView();
+        _userDataUpdateView = new UserDataUpdateView(_userService);
     }
 
     public void Show(User user)
     {
         while (true)
         {
+            Console.WriteLine("\n*** Меню пользователя ***\n");
             //Console.WriteLine("Входящие сообщения: {0}", user.IncomingMessages.Count());
             //Console.WriteLine("Исходящие сообщения: {0}", user.OutgoingMessages.Count());
             //Console.WriteLine("Мои друзья: {0}", user.Friends.Count());
@@ -47,8 +50,8 @@ public class UserMenuView
                     }
                 case "2":
                     {
-                        //Program.userDataUpdateView.Show(user);
-                        //user = _userService.FindById(user.Id);
+                        _userDataUpdateView.Show(user);
+                        user = _userService.FindById(user.Id);
                         break;
                     }
 
