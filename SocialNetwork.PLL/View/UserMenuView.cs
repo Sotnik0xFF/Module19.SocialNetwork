@@ -1,14 +1,19 @@
 ﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.PLL.Viewж;
 
 namespace SocialNetwork.PLL.View;
 
 public class UserMenuView
 {
-    UserService _userService;
+    private UserService _userService;
+    private UserInfoView _userInfoView;
+
     public UserMenuView(UserService userService)
     {
         _userService = userService;
+
+        _userInfoView = new UserInfoView();
     }
 
     public void Show(User user)
@@ -37,7 +42,7 @@ public class UserMenuView
             {
                 case "1":
                     {
-                        //Program.userInfoView.Show(user);
+                        _userInfoView.Show(user);
                         break;
                     }
                 case "2":
