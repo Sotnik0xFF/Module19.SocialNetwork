@@ -22,7 +22,7 @@ namespace SocialNetwork.DAL.Repositories
                 VALUES (
                     @{nameof(MessageEntity.Content)},
                     @{nameof(MessageEntity.SenderId)},
-                    @{nameof(MessageEntity.RecipientId)}";
+                    @{nameof(MessageEntity.RecipientId)})";
 
             return Execute(sql, messageEntity);
         }

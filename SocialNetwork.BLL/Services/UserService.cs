@@ -120,7 +120,8 @@ public class UserService
             FriendId = friend.Id
         };
 
-        _friendRepository.Create(friendEntity);
+        if (_friendRepository.Create(friendEntity) == 0)
+            throw new Exception();
 
     }
 
@@ -141,6 +142,6 @@ public class UserService
                       _messageService.GetOutcomingMessagesByUserId(userEntity.Id),
                       GetFriendsByUserId(userEntity.Id),
                       userEntity.FavoriteMovie,
-                      userEntity.FavoriteBook) ;
+                      userEntity.FavoriteBook);
     }
 }
