@@ -23,8 +23,8 @@ public class UserMenuView
         while (true)
         {
             Console.WriteLine("\n*** Меню пользователя ***\n");
-            //Console.WriteLine("Входящие сообщения: {0}", user.IncomingMessages.Count());
-            //Console.WriteLine("Исходящие сообщения: {0}", user.OutgoingMessages.Count());
+            Console.WriteLine("Входящие сообщения: {0}", user.IncomingMessages.Count());
+            Console.WriteLine("Исходящие сообщения: {0}", user.OutgoingMessages.Count());
             //Console.WriteLine("Мои друзья: {0}", user.Friends.Count());
 
             Console.WriteLine("1 - Просмотреть информацию о профиле");

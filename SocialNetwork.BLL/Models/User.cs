@@ -10,6 +10,10 @@ public class User
     public string? Photo { get; set; }
     public string? FavoriteMovie { get; set; }
     public string? FavoriteBook { get; set; }
+    public IEnumerable<Message> IncomingMessages { get; }
+    public IEnumerable<Message> OutgoingMessages { get; }
+    public IEnumerable<User> Friends { get; }
+
 
     public User(
         int id,
@@ -18,6 +22,9 @@ public class User
         string? password,
         string? email,
         string? photo,
+        IEnumerable<Message> incomingMessages,
+        IEnumerable<Message> outgoingMessages,
+        IEnumerable<User> friends,
         string? favoriteMovie,
         string? favoriteBook)
     {
@@ -27,6 +34,9 @@ public class User
         Password = password;
         Email = email;
         Photo = photo;
+        IncomingMessages = incomingMessages;
+        OutgoingMessages = outgoingMessages;
+        Friends = friends;
         FavoriteMovie = favoriteMovie;
         FavoriteBook = favoriteBook;
     }

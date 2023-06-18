@@ -38,9 +38,10 @@ namespace SocialNetwork.DAL.Repositories
         {
             string sql = $@"
                 SELECT {FriendColumns}
-                FROM friends";
+                FROM friends
+                WHERE user_id = @FriendEntryUserId";
 
-            return Query<FriendEntity>(sql);
+            return Query<FriendEntity>(sql, new { FriendEntryUserId = userId});
         }
     }
 }

@@ -8,11 +8,15 @@ namespace SocialNetwork.BLL.Services;
 
 public class UserService
 {
-    IUserRepository userRepository;
+    MessageService _messageService;
+    IUserRepository _userRepository;
+    IFriendRepository _friendRepository;
 
     public UserService()
     {
-        userRepository = new UserRepository();
+        _messageService = new MessageService();
+        _userRepository = new UserRepository();
+        _friendRepository = new FriendRepository();
     }
 
     public void Register(UserRegistrationData data)
@@ -35,7 +39,7 @@ public class UserService
         if (!new EmailAddressAttribute().IsValid(data.Email))
             throw new ArgumentException(nameof(data.Email), "Invalid Email.");
 
-        if (userRepository.FindByEmail(data.Email) != null)
+        if (_userRepository.FindByEmail(data.Email) != null)
             throw new ArgumentException(nameof(data.Email), "Email already used.");
 
         UserEntity user = new()
@@ -46,13 +50,13 @@ public class UserService
             Email = data.Email
         };
 
-        if (userRepository.Create(user) == 0)
+        if (_userRepository.Create(user) == 0)
             throw new Exception();
     }
 
     public User FindByEmail(string email)
     {
-        UserEntity? findUserEntity = userRepository.FindByEmail(email);
+        UserEntity? findUserEntity = _userRepository.FindByEmail(email);
         if (findUserEntity is null)
             throw new UserNotFoundException();
 
@@ -61,7 +65,7 @@ public class UserService
 
     public User FindById(int id)
     {
-        UserEntity? findUserEntity = userRepository.FindById(id);
+        UserEntity? findUserEntity = _userRepository.FindById(id);
         if (findUserEntity is null)
             throw new UserNotFoundException();
 
@@ -73,7 +77,7 @@ public class UserService
         if (String.IsNullOrEmpty(userAuthenticationData.Email))
             throw new ArgumentException(nameof(UserAuthenticationData.Email));
 
-        var findUserEntity = userRepository.FindByEmail(userAuthenticationData.Email);
+        var findUserEntity = _userRepository.FindByEmail(userAuthenticationData.Email);
         if (findUserEntity is null) throw new UserNotFoundException();
 
         if (findUserEntity.Password != userAuthenticationData.Password)
@@ -96,8 +100,33 @@ public class UserService
             FavoriteBook = user.FavoriteBook
         };
 
-        if (userRepository.Update(updatableUserEntity) == 0)
+        if (_userRepository.Update(updatableUserEntity) == 0)
             throw new Exception();
+    }
+
+    public void AddFriend(UserAddingFriendData userAddingFriendData)
+    {
+        if (String.IsNullOrEmpty(userAddingFriendData.FriendEmail))
+            throw new ArgumentNullException(nameof(UserAddingFriendData.FriendEmail));
+
+        UserEntity? friend = _userRepository.FindByEmail(userAddingFriendData.FriendEmail);
+
+        if (friend is null)
+            throw new UserNotFoundException();
+
+        FriendEntity friendEntity = new()
+        {
+            UserId = userAddingFriendData.UserId,
+            FriendId = friend.Id
+        };
+
+        _friendRepository.Create(friendEntity);
+
+    }
+
+    public IEnumerable<User> GetFriendsByUserId(int userId)
+    {
+        return _friendRepository.FindAllByUserId(userId).Select(friendsEntity => FindById(friendsEntity.FriendId));
     }
 
     private User ConstructUserModel(UserEntity userEntity)
@@ -108,7 +137,10 @@ public class UserService
                       userEntity.Password,
                       userEntity.Email,
                       userEntity.Photo,
+                      _messageService.GetIncomingMessagesByUserId(userEntity.Id),
+                      _messageService.GetOutcomingMessagesByUserId(userEntity.Id),
+                      GetFriendsByUserId(userEntity.Id),
                       userEntity.FavoriteMovie,
-                      userEntity.FavoriteBook);
+                      userEntity.FavoriteBook) ;
     }
 }
