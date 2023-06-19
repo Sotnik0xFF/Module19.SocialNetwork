@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.PLL", "SocialNetwork.PLL\SocialNetwork.PLL.csproj", "{CA2A02D7-C870-4500-A875-46914A2D11D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.PLL", "SocialNetwork.PLL\SocialNetwork.PLL.csproj", "{CA2A02D7-C870-4500-A875-46914A2D11D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.DAL", "SocialNetwork.DAL\SocialNetwork.DAL.csproj", "{3082209A-2A51-49A6-8EB7-8F635B1A4C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.DAL", "SocialNetwork.DAL\SocialNetwork.DAL.csproj", "{3082209A-2A51-49A6-8EB7-8F635B1A4C1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.BLL", "SocialNetwork.BLL\SocialNetwork.BLL.csproj", "{409377DC-E3A7-4EF4-A1C3-A363D5E164AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.BLL", "SocialNetwork.BLL\SocialNetwork.BLL.csproj", "{409377DC-E3A7-4EF4-A1C3-A363D5E164AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.BLL.Tests", "SocialNetwork.BLL.Tests\SocialNetwork.BLL.Tests.csproj", "{7889CF3D-C40D-49CB-AFB8-812041956667}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{409377DC-E3A7-4EF4-A1C3-A363D5E164AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{409377DC-E3A7-4EF4-A1C3-A363D5E164AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{409377DC-E3A7-4EF4-A1C3-A363D5E164AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7889CF3D-C40D-49CB-AFB8-812041956667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7889CF3D-C40D-49CB-AFB8-812041956667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7889CF3D-C40D-49CB-AFB8-812041956667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7889CF3D-C40D-49CB-AFB8-812041956667}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

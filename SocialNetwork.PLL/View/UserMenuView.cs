@@ -12,6 +12,8 @@ public class UserMenuView
     private MessageSendingView _messageSendingView;
     private UserIncomingMessageView _userIncomingMessageView;
     private UserOutcomingMessageView _userOutcomingMessageView;
+    private UserFriendView _userFriendView;
+    private AddingFriendView _addingFriendView;
 
     public UserMenuView(UserService userService)
     {
@@ -22,6 +24,8 @@ public class UserMenuView
         _messageSendingView = new(_userService);
         _userIncomingMessageView = new();
         _userOutcomingMessageView = new();
+        _userFriendView = new();
+        _addingFriendView = new(_userService);
     }
 
     public void Show(User user)
@@ -63,7 +67,7 @@ public class UserMenuView
 
                 case "3":
                     {
-                        //Program.addingFriendView.Show(user);
+                        _addingFriendView.Show(user);
                         break;
                     }
 
@@ -87,7 +91,7 @@ public class UserMenuView
 
                 case "7":
                     {
-                        //Program.userFriendView.Show(user.Friends);
+                        _userFriendView.Show(user.Friends);
                         break;
                     }
             }

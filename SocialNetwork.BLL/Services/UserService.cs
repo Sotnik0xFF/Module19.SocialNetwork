@@ -19,6 +19,8 @@ public class UserService
         _friendRepository = new FriendRepository();
     }
 
+    public MessageService MessageService => _messageService;
+
     public void Register(UserRegistrationData data)
     {
         if (String.IsNullOrEmpty(data.FirstName))

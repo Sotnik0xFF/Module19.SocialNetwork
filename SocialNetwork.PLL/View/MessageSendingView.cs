@@ -12,7 +12,7 @@ public class MessageSendingView
 
     public MessageSendingView(UserService userService)
     {
-        _messageService = new MessageService();
+        _messageService = userService.MessageService;
         _userService = userService;
     }
 

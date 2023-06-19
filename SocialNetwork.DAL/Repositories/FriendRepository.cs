@@ -20,7 +20,7 @@ namespace SocialNetwork.DAL.Repositories
                 INSERT INTO friends (user_id, friend_id)
                 VALUES (
                     @{nameof(FriendEntity.UserId)},
-                    @{nameof(FriendEntity.UserId)})";
+                    @{nameof(FriendEntity.FriendId)})";
 
             return Execute(sql, friendEntity);
         }
