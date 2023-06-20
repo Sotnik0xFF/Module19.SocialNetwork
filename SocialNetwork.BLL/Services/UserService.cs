@@ -132,6 +132,11 @@ public class UserService
         return _friendRepository.FindAllByUserId(userId).Select(friendsEntity => FindById(friendsEntity.FriendId));
     }
 
+    public void DeleteUser(User user)
+    {
+        _userRepository.DeleteById(user.Id);
+    }
+
     private User ConstructUserModel(UserEntity userEntity)
     {
         return new User(userEntity.Id,

@@ -30,6 +30,7 @@ namespace SocialNetwork.DAL.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
+                connection.Execute("PRAGMA foreign_keys = '1'");
                 return connection.Execute(sql, parameters);
             }
         }
