@@ -1,6 +1,7 @@
 ﻿using SocialNetwork.BLL.Exceptions;
 using SocialNetwork.BLL.Models;
 using SocialNetwork.DAL.Entities;
+using SocialNetwork.DAL.Interfaces;
 using SocialNetwork.DAL.Repositories;
 
 namespace SocialNetwork.BLL.Services;

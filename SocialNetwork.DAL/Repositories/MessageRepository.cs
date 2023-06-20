@@ -1,4 +1,5 @@
 ﻿using SocialNetwork.DAL.Entities;
+using SocialNetwork.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

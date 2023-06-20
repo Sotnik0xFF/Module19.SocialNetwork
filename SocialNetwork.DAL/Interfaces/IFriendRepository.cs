@@ -1,6 +1,6 @@
 ﻿using SocialNetwork.DAL.Entities;
 
-namespace SocialNetwork.DAL.Repositories;
+namespace SocialNetwork.DAL.Interfaces;
 
 public interface IFriendRepository
 {
